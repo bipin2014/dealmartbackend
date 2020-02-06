@@ -5,6 +5,10 @@ const app = express();
 const mongoose = require("mongoose");
 const productRoute = require('./routes/Products');
 const authRoute = require('./routes/auth');
+const cartRoute=require('./routes/CartRoute');
+const paymentRoute=require('./routes/PaymentRoute');
+const orderRoute=require('./routes/OrderRoute');
+
 const productModel = require('./models/products');
 const bodyParser = require('body-parser');
 
@@ -21,6 +25,9 @@ const middle = (req, res) => {
 
 app.use('/api/products', productRoute)
 app.use('/api/user', authRoute)
+app.use('/api/cart', cartRoute)
+app.use('/api/payment', paymentRoute)
+app.use('/api/order', orderRoute)
 
 app.use('/uploads',express.static('uploads'));
 

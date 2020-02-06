@@ -13,11 +13,22 @@ const ProductSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
+    deliveryCharge: {
+        type: Number,
+        required: true,
+    },
     image: String,
-    user: {
+    category:{
+        type:[String],
+        required:true,
+        default:["mobile","laptop"]
+    },
+    brand: {
         type: String,
         required: true,
     },
+    warranty:String,
+    user: {type: mongoose.Schema.Types.ObjectId, ref: 'Users',required:true},
     date: {
         type: Date,
         default: Date.now,

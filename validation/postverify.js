@@ -10,7 +10,7 @@ module.exports = async function (req, res, next) {
         req.user = verified;
         const user = await userModel.findById(req.user._id);
         if (user.usertype === ADMIN) next();
-        else return res.send("User cannot post");
+        else return res.send("Buyers cannot add Products");
     } catch (err) {
         return res.json(err);
     }
