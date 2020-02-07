@@ -9,7 +9,7 @@ router.post('/makeOrder', auth, async (req, res) => {
 
     const orderData = new orderModel({
         user: req.user._id,
-        product: req.body.product,
+        products: req.body.products,
         payment:req.body.paymentId,
     });
 
@@ -23,7 +23,7 @@ router.post('/makeOrder', auth, async (req, res) => {
 
 router.get('/', auth, async (req, res) => {
     try {
-        const order = await orderModel.find({"user":req.user._id}).populate('payment')
+        const order = await orderModel.find({"user":req.user._id}).populate('payment').populate('products.product');
         return res.json({order: order});
 
     } catch (e) {

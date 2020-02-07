@@ -29,6 +29,8 @@ router.post('/add', auth, async (req, res) => {
     }
 });
 
+
+
 router.get('/', auth, async (req, res) => {
     try {
         const cart = await cartModel.find({"user":req.user._id}).populate('product');

@@ -45,6 +45,17 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/limit/:number', async (req, res) => {
+    console.log(req.params.number);
+    
+    try {
+        const products = await productModel.find().limit(parseInt(req.params.number)).sort({name:1});
+        res.json(products);
+    } catch (err) {
+        res.json({error: err})
+    }
+});
+
 router.get('/getByUser',auth, async (req, res) => {
     try {
         const products = await productModel.find({"user":req.user._id});

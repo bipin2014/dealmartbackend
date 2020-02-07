@@ -22,7 +22,6 @@ const UserSchema=mongoose.Schema({
         type:String,
         default:"Buyer"
     },
-    becomeSeller:String,
     // address:{type: mongoose.Schema.Types.ObjectId, ref: 'Users',required:true},
     date:{
         type:Date,

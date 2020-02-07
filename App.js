@@ -11,6 +11,7 @@ const orderRoute=require('./routes/OrderRoute');
 
 const productModel = require('./models/products');
 const bodyParser = require('body-parser');
+const bSellerRoute=require('./routes/bSellerAction');
 
 
 
@@ -28,6 +29,7 @@ app.use('/api/user', authRoute)
 app.use('/api/cart', cartRoute)
 app.use('/api/payment', paymentRoute)
 app.use('/api/order', orderRoute)
+app.use('/api/bSeller', bSellerRoute)
 
 app.use('/uploads',express.static('uploads'));
 

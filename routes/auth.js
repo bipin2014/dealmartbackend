@@ -9,6 +9,7 @@ const auth = require('../validation/verifywebtoken');
 const jwt = require('jsonwebtoken');
 
 const bcrypt = require('bcryptjs');
+const bsModel=require('../models/becomeSeller')
 
 const { registerValidation, loginValidation } = require('../validation/userdetail');
 
@@ -71,6 +72,21 @@ router.get('/getUser',auth,async (req,res)=>{
     }else{
         return res.json({"error":"Please Login"})
         
+    }
+});
+
+
+//make Seller
+router.patch('/makeSeller/:userId', async (req, res) => {
+    try {
+        const updated = await userModel.updateOne({_id: req.params.userId}, {$set: {usertype: "Seller"}});
+        if(updated){
+            await bsModel.deleteOne({user: req.params.userId});
+        }
+        res.json(updated);
+
+    } catch (err) {
+        res.json({error: err})
     }
 })
 
