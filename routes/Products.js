@@ -88,10 +88,27 @@ router.post('/', postverify, upload.single("image"), async (req, res) => {
 
 });
 
+//Product Search 
 router.get('/search/:productname', async (req, res) => {
     console.log(req.params.productname);
     try {
-        const product = await productModel.find({"name":{ $regex : ".*"+ req.params.productname +".*", $options:'i' }});
+        const product = await productModel.find( { $or:[ {'name':{ $regex : ".*"+ req.params.productname +".*", $options:'i' }}, 
+        {'category':{ $regex : ".*"+ req.params.productname +".*", $options:'i' }}, {'brand':{ $regex : ".*"+ req.params.productname +".*", $options:'i' }}]});
+        console.log(product)
+        res.json({body: product});
+    } catch (err) {
+        res.json({error: err})
+    }
+
+});
+
+//Product Search with order
+router.get('/search/:productname/:order', async (req, res) => {
+    console.log(req.params.productname);
+    const order=req.params.order==="ascending"?1:-1;
+    try {
+        const product = await productModel.find( { $or:[ {'name':{ $regex : ".*"+ req.params.productname +".*", $options:'i' }}, 
+        {'category':{ $regex : ".*"+ req.params.productname +".*", $options:'i' }}, {'brand':{ $regex : ".*"+ req.params.productname +".*", $options:'i' }}]}).sort({"price":order});
         console.log(product)
         res.json({body: product});
     } catch (err) {
