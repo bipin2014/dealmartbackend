@@ -5,7 +5,8 @@ const registerValidation=(data)=>{
         name:joi.string().min(3).required(),
         email:joi.string().min(6).required().email(),
         password:joi.string().min(6).required(),
-        confirmPassword:joi.string().min(6).required()
+        confirmPassword:joi.string().min(6).required(),
+        referal:joi.string()
     });
 
     return schema.validate(data);

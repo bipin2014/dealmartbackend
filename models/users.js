@@ -22,6 +22,11 @@ const UserSchema=mongoose.Schema({
         type:String,
         default:"Buyer"
     },
+    rewardPoint:{
+        type:Number,
+        default:0
+    },
+    referalKey:String,
     // address:{type: mongoose.Schema.Types.ObjectId, ref: 'Users',required:true},
     date:{
         type:Date,
